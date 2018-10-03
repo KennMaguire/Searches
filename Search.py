@@ -1,6 +1,5 @@
-import re
-
 import string
+
 
 filename = "shakespeare.txt"
 f = open(filename, 'r')
@@ -8,8 +7,9 @@ f = open(filename, 'r')
 
 wordList = []
 
+
 for line in f:
-    line = line.translate(None, string.punctuation) #remove punctuation from input sequence  https://stackoverflow.com/questions/265960/best-way-to-strip-punctuation-from-a-string-in-python
+    line = line.translate(str.maketrans('','',string.punctuation)) #remove punctuation from input sequence  https://stackoverflow.com/questions/265960/best-way-to-strip-punctuation-from-a-string-in-python
     for word in line.split():
         wordList.append(word.lower())
 
