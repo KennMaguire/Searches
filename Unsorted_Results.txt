@@ -1,0 +1,32 @@
+The first 10 words are:
+a 13840
+midsummernights 1
+dream 120
+now 2798
+fair 729
+hippolyta 6
+our 3117
+nuptial 21
+hour 292
+draws 26
+
+
+
+The first 10 words are:
+citing 1
+architect 1
+plotter 1
+misbelieving 1
+bloodstaind 1
+execrable 1
+breastdeep 1
+relieves 1
+beastlike 1
+devoid 1
+
+
+
+The number of comparisons is: <__main__.comparisonCounter object at 0x104dd06d8>
+The number of assignments is: <__main__.assignmentCounter object at 0x104dd06a0>
+Process time =
+460.61678194999695

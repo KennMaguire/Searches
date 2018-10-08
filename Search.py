@@ -94,7 +94,7 @@ for k,v in n_items:
     print(k,v)
 print("\n\n")
 
-print("The number of comparisons is: " + str(compInt)
+print("The number of comparisons is: " + str(compInt))
 print("The number of assignments is: " + str(assignInt))
 
 
