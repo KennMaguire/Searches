@@ -64,7 +64,7 @@ def unsortedSearch(_unsortedDict, _searchKey, _assign, _comp):
 filename = "shakespeare.txt"
 f = open(filename, 'r')
 
-t0 = time.process_time()
+start_time = time.time()
 wordList = []
 d_w_unsorted = {}
 assignInt = assignmentCounter()
@@ -79,6 +79,8 @@ for line in f:
         #print(d_w_unsorted)
 
 
+print(d_w_unsorted)
+
 
 print("The first 10 words are: ")
 n_items = takeFirst(10, d_w_unsorted.items())
@@ -92,14 +94,17 @@ for k,v in n_items:
     print(k,v)
 print("\n\n")
 
+print("The number of comparisons is: " + str(compInt)
+print("The number of assignments is: " + str(assignInt))
+
 
 print("Process time = ")
-print(t0)
+print(time.time() - start_time)
 print("\n")
 
 
 
-print(d_w_unsorted)
+
 """
 
 i = 0
