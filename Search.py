@@ -17,6 +17,7 @@ import string
 import time
 
 from itertools import islice
+import re
 #this function was found on stackoverflow for slicing a dictionary
 #https://stackoverflow.com/questions/7971618/python-return-first-n-keyvalue-pairs-from-dict
 def takeFirst(n, iterable):
@@ -61,7 +62,7 @@ def unsortedSearch(_unsortedDict, _searchKey, _assign, _comp):
 
 
 
-filename = "shakespeare.txt"
+filename = "wordlist.txt"
 f = open(filename, 'r')
 
 start_time = time.time()
@@ -71,16 +72,22 @@ assignInt = assignmentCounter()
 compInt = comparisonCounter()
 
 for line in f:
-    line = line.translate(str.maketrans('','',string.punctuation)) #remove punctuation from input sequence  https://stackoverflow.com/questions/265960/best-way-to-strip-punctuation-from-a-string-in-python
+    line = line.translate(str.maketrans('','', '!.@"$?&:;,/()*^%>+=|<}{[]'))   #remove punctuation from input sequence  https://stackoverflow.com/questions/265960/best-way-to-strip-punctuation-from-a-string-in-python
+    line = re.sub('[0-9]', '', line)                               #remove numbers https://stackoverflow.com/questions/35256946/python-3x-remove-numbers-from-file-names
     for word in line.split():
         wordLow = word.lower()      #set word to lower case
+        wordLow = wordLow.replace("'", "") if wordLow.startswith("'") else wordLow
         #wordList.append(wordLow)
         d_w_unsorted = unsortedSearch(d_w_unsorted, wordLow, assignInt, compInt)
-        #print(d_w_unsorted)
-
+                                                                                                #https://www.saltycrane.com/blog/2007/09/how-to-sort-python-dictionary-by-keys/ for help with sorting and printing
+        #d_w_unsorted = sorted(d_w_unsorted)
+        #print(sorted(d_w_unsorted))
 
 print(d_w_unsorted)
 
+d_w_unsorted.pop("'", None)
+d_w_unsorted.pop('"', None)
+d_w_unsorted.pop('', None)
 
 print("The first 10 words are: ")
 n_items = takeFirst(10, d_w_unsorted.items())
@@ -94,13 +101,57 @@ for k,v in n_items:
     print(k,v)
 print("\n\n")
 
-print("The number of comparisons is: " + str(compInt))
-print("The number of assignments is: " + str(assignInt))
+print("The number of comparisons is: " + str(compInt.total))
+print("The number of assignments is: " + str(assignInt.total))
 
 
 print("Process time = ")
 print(time.time() - start_time)
 print("\n")
+
+print("The number of unique words is: ")
+print(len(d_w_unsorted))
+print("\n")
+
+
+d_w_unsorted = sorted(d_w_unsorted.items())
+
+
+print(d_w_unsorted)
+
+#now do it for the sorted dictionary
+
+print("The number of unique words is: ")
+print(len(d_w_unsorted))
+print("\n")
+
+
+"""
+print("The first 10 words are: ")
+#n_items = takeFirst(10, d_w_unsorted.items())
+"""
+for k,v in d_w_unsorted[0:10]:
+    print(k,v)
+print("\n\n")
+listLenMin10 = len(d_w_unsorted) - 10
+print("The first 10 words are: ")
+#n_items = takeLast(listLenMin10, d_w_unsorted.items())
+for k,v in d_w_unsorted[listLenMin10:len(d_w_unsorted)]:
+    print(k,v)
+print("\n\n")
+
+
+
+print("The number of comparisons is: " + str(compInt.total))
+print("The number of assignments is: " + str(assignInt.total))
+
+
+print("Process time = ")
+print(time.time() - start_time)
+print("\n")
+
+
+
 
 
 

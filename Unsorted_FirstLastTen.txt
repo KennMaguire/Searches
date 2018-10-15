@@ -1,0 +1,35 @@
+The number of unique words is:
+27964
+
+
+a 13720
+a' 120
+a's 1
+a-bat-fowling 1
+a-bed 12
+a-birding 4
+a-bleeding 2
+a-breeding 1
+a-brewing 1
+a-broach 1
+
+
+
+The first 10 words are:
+zenelophon 1
+zenith 1
+zephyrs 1
+zo 1
+zodiac 1
+zodiacs 1
+zone 1
+zounds 19
+zur 2
+zwaggered 1
+
+
+
+The number of comparisons is: 1662586848
+The number of assignments is: 27965
+Process time =
+483.0432999134064
