@@ -76,7 +76,7 @@ for line in f:
     line = re.sub('[0-9]', '', line)                               #remove numbers https://stackoverflow.com/questions/35256946/python-3x-remove-numbers-from-file-names
     for word in line.split():
         wordLow = word.lower()      #set word to lower case
-        wordLow = wordLow.replace("'", "") if wordLow.startswith("'") else wordLow
+        wordLow = wordLow.replace(wordLow, "") if wordLow.startswith("'") else wordLow
         #wordList.append(wordLow)
         d_w_unsorted = unsortedSearch(d_w_unsorted, wordLow, assignInt, compInt)
                                                                                                 #https://www.saltycrane.com/blog/2007/09/how-to-sort-python-dictionary-by-keys/ for help with sorting and printing
