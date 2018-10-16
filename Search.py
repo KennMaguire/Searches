@@ -83,7 +83,7 @@ for line in f:
         #d_w_unsorted = sorted(d_w_unsorted)
         #print(sorted(d_w_unsorted))
 
-print(d_w_unsorted)
+#print(d_w_unsorted)
 
 d_w_unsorted.pop("'", None)
 d_w_unsorted.pop('"', None)
@@ -117,7 +117,7 @@ print("\n")
 d_w_unsorted = sorted(d_w_unsorted.items())
 
 
-print(d_w_unsorted)
+#print(d_w_unsorted)
 
 #now do it for the sorted dictionary
 
@@ -130,17 +130,25 @@ print("\n")
 print("The first 10 words are: ")
 #n_items = takeFirst(10, d_w_unsorted.items())
 """
+
+"""
+print("The first 10 words are: ")
 for k,v in d_w_unsorted[0:10]:
     print(k,v)
 print("\n\n")
 listLenMin10 = len(d_w_unsorted) - 10
-print("The first 10 words are: ")
+print("The last 10 words are: ")
 #n_items = takeLast(listLenMin10, d_w_unsorted.items())
 for k,v in d_w_unsorted[listLenMin10:len(d_w_unsorted)]:
     print(k,v)
 print("\n\n")
 
+"""
+f2 = open("wordListSorted.txt", "w")
 
+
+for k,v in d_w_unsorted:
+    f2.write("%s\n" % k)
 
 print("The number of comparisons is: " + str(compInt.total))
 print("The number of assignments is: " + str(assignInt.total))

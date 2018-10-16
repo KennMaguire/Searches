@@ -72,7 +72,8 @@ for line in f:
     for word in line.split():
         wordLow = word.lower()      #set word to lower case
         wordLow = wordLow.replace(wordLow, "") if wordLow.startswith("'") else wordLow
-        my_hash_t.insertAndSearch(wordLow, wordC)
+        if wordLow != '':
+            my_hash_t.insertAndSearch(wordLow, wordC)
 
 print(my_hash_t.hash_table)
 
