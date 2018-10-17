@@ -1,20 +1,30 @@
-#need to fix python 3 profile
 """
 Kenneth Maguire
 Python 3 Program
 
-Search.py
+
+SearchSorted.py
 This program add the works of shakespeare to a dictionary and determines how many of each word exists
-The program does this through unsorted, sorted, and hash searching methods.
+The program does this through an unsorted searching method.
+
 
 
 
 """
+
+
+
+
+
+
+
+
 
 
 
 import string
 import time
+import operator
 
 from itertools import islice
 import re
@@ -41,20 +51,55 @@ class assignmentCounter:
     def add(self, x):
         self.total += x
 
+class wordAndValue:
+    def __init__(self, wordPassed, value):
+        self.word = wordPassed
+        self.val = value
+    def __lt__(self, other):
+        return self.word < other.word
 
-def unsortedSearch(_unsortedDict, _searchKey, _assign, _comp):
-    for k,v in _unsortedDict.items():
-        _comp.add(1)
-        if k == _searchKey:
-            #print(1)
-            _unsortedDict[_searchKey] = v + 1
-        #    print(k,v)
-            return _unsortedDict
+
+
+def sortedSearch(_sortedList, _searchKey, _assign, _comp):
+
+    for i in range(len(_sortedList)):
+        print(_sortedList[i].word, _sortedList[i].val)
+    wordV = wordAndValue(_searchKey, 1)
+
+    end = (len(_sortedList)-1)          #end is the length of the list-1
+    start = 0
+
+
+    _sortedList = sorted(_sortedList)
+
+    while start <= end:
+        halfway = int((start + end)/2)      #each iteration, start is increased by 1,
+        print(halfway)
+        if _sortedList[halfway].word == _searchKey:          #if key is at midpoint, add 1 to value
+            print(_sortedList)
+            print(1)
+            _sortedList[halfway].val += 1
+            _comp.add(1)
+            return _sortedList
+        elif _searchKey < _sortedList[halfway].word:
+            print(2)
+            _comp.add(1)
+            end = halfway - 1
+        else:
+            print(3)
+            start = halfway + 1
+            _comp.add(1)
+                                      #if the key isn't greater or less than any value, add to list
+    print(4)
+    print(_sortedList)
+    _sortedList = _sortedList[:halfway] + [wordV] + _sortedList[halfway:]                  #https://stackoverflow.com/questions/14895599/insert-an-element-at-specific-index-in-a-list-and-return-updated-list
+    _assign.add(1)
+    return _sortedList
+
 
     #print(2)
-    _assign.add(1)
-    _unsortedDict[_searchKey] = 1
-    return _unsortedDict
+
+
 
 
 
@@ -66,10 +111,11 @@ filename = "wordlist.txt"
 f = open(filename, 'r')
 
 start_time = time.time()
-wordList = []
-d_w_unsorted = {}
+
 assignInt = assignmentCounter()
 compInt = comparisonCounter()
+
+sortedList = []
 
 for line in f:
     line = line.translate(str.maketrans('','', '!.@"$?&:;,/()*^%>+=|<}{[]'))   #remove punctuation from input sequence  https://stackoverflow.com/questions/265960/best-way-to-strip-punctuation-from-a-string-in-python
@@ -78,7 +124,14 @@ for line in f:
         wordLow = word.lower()      #set word to lower case
         wordLow = wordLow.replace(wordLow, "") if wordLow.startswith("'") else wordLow
         #wordList.append(wordLow)
-        d_w_unsorted = unsortedSearch(d_w_unsorted, wordLow, assignInt, compInt)
+        print(sortedList)
+        if not sortedList:
+            firstWordV = wordAndValue(wordLow, 1)
+            print(sortedList)
+            sortedList.append(firstWordV)
+            print(sortedList)
+
+        sortedList = sortedSearch(sortedList, wordLow, assignInt, compInt)
                                                                                                 #https://www.saltycrane.com/blog/2007/09/how-to-sort-python-dictionary-by-keys/ for help with sorting and printing
         #d_w_unsorted = sorted(d_w_unsorted)
         #print(sorted(d_w_unsorted))
@@ -142,36 +195,4 @@ print("The last 10 words are: ")
 for k,v in d_w_unsorted[listLenMin10:len(d_w_unsorted)]:
     print(k,v)
 print("\n\n")
-
-"""
-f2 = open("wordListSorted.txt", "w")
-
-
-for k,v in d_w_unsorted:
-    f2.write("%s\n" % k)
-
-print("The number of comparisons is: " + str(compInt.total))
-print("The number of assignments is: " + str(assignInt.total))
-
-
-print("Process time = ")
-print(time.time() - start_time)
-print("\n")
-
-
-
-
-
-
-
-"""
-
-i = 0
-while i < 100:
-    print(wordList[i])
-    i += 1
-i = (len(wordList) - 100)
-while i < len(wordList):
-    print(wordList[i])
-    i += 1
 """
