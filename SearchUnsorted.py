@@ -1,11 +1,12 @@
-#need to fix python 3 profile
 """
 Kenneth Maguire
 Python 3 Program
 
-Search.py
+
+SearchUnsorted.py
 This program add the works of shakespeare to a dictionary and determines how many of each word exists
-The program does this through a sorted searching method, specifically binary search.
+The program does this through a unsorted searching method.
+
 
 
 
@@ -44,15 +45,15 @@ class assignmentCounter:
 
 def unsortedSearch(_unsortedDict, _searchKey, _assign, _comp):
     for k,v in _unsortedDict.items():
-        _comp.add(1)
-        if k == _searchKey:
+        _comp.add(1)                        #add 1 to comparisons
+        if k == _searchKey:                 #if key found, add 1 to occurrences
             #print(1)
             _unsortedDict[_searchKey] = v + 1
         #    print(k,v)
             return _unsortedDict
 
     #print(2)
-    _assign.add(1)
+    _assign.add(1)                          #if key not found, add to end of dictionary and add 1 to assignments
     _unsortedDict[_searchKey] = 1
     return _unsortedDict
 
@@ -76,7 +77,7 @@ for line in f:
     line = re.sub('[0-9]', '', line)                               #remove numbers https://stackoverflow.com/questions/35256946/python-3x-remove-numbers-from-file-names
     for word in line.split():
         wordLow = word.lower()      #set word to lower case
-        wordLow = wordLow.replace(wordLow, "") if wordLow.startswith("'") else wordLow
+        wordLow = wordLow.replace(wordLow, "") if wordLow.startswith("'") else wordLow      #remove if word starts with '
         #wordList.append(wordLow)
         d_w_unsorted = unsortedSearch(d_w_unsorted, wordLow, assignInt, compInt)
                                                                                                 #https://www.saltycrane.com/blog/2007/09/how-to-sort-python-dictionary-by-keys/ for help with sorting and printing
@@ -88,15 +89,15 @@ for line in f:
 d_w_unsorted.pop("'", None)
 d_w_unsorted.pop('"', None)
 d_w_unsorted.pop('', None)
-
+                                                                        #print once unsorted, with unsorted results
 print("The first 10 words are: ")
-n_items = takeFirst(10, d_w_unsorted.items())
+n_items = takeFirst(10, d_w_unsorted.items())                           #slice list into 0 through 10
 for k,v in n_items:
     print(k,v)
 print("\n\n")
 listLenMin10 = len(d_w_unsorted) - 10
 print("The first 10 words are: ")
-n_items = takeLast(listLenMin10, d_w_unsorted.items())
+n_items = takeLast(listLenMin10, d_w_unsorted.items())                   #slice list into len-10 through 10
 for k,v in n_items:
     print(k,v)
 print("\n\n")
@@ -114,12 +115,13 @@ print(len(d_w_unsorted))
 print("\n")
 
 
-d_w_unsorted = sorted(d_w_unsorted.items())
+d_w_unsorted = sorted(d_w_unsorted.items())                             #sort
 
 
 #print(d_w_unsorted)
 
 #now do it for the sorted dictionary
+                                                                        #print again, this time sorted
 
 print("The number of unique words is: ")
 print(len(d_w_unsorted))
@@ -131,7 +133,7 @@ print("The first 10 words are: ")
 #n_items = takeFirst(10, d_w_unsorted.items())
 """
 
-"""
+
 print("The first 10 words are: ")
 for k,v in d_w_unsorted[0:10]:
     print(k,v)
@@ -142,13 +144,13 @@ print("The last 10 words are: ")
 for k,v in d_w_unsorted[listLenMin10:len(d_w_unsorted)]:
     print(k,v)
 print("\n\n")
-"""
+
 f2 = open("wordListSorted.txt", "w")
 
-
+"""
 for k,v in d_w_unsorted:
     f2.write("%s\n" % k)
-
+"""
 print("The number of comparisons is: " + str(compInt.total))
 print("The number of assignments is: " + str(assignInt.total))
 
