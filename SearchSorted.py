@@ -135,17 +135,21 @@ for line in f:
     line = re.sub('[0-9]', '', line)                               #remove numbers https://stackoverflow.com/questions/35256946/python-3x-remove-numbers-from-file-names
     for word in line.split():
         wordLow = word.lower()      #set word to lower case
+        wordLow = wordLow.strip()
         wordLow = wordLow.replace(wordLow, "") if wordLow.startswith("'") else wordLow
         #wordList.append(wordLow)
         #print(sortedList)
+
         if not sortedList:
             print(1)
             firstWordV = wordAndValue(wordLow, 1)
         #    print(sortedList)
             sortedList.append(firstWordV)
         #    print(sortedList)
-
-        sortedList = sortedSearch(sortedList, wordLow, assignInt, compInt)
+        if wordLow == "" or wordLow == " ":
+            pass
+        else:
+            sortedList = sortedSearch(sortedList, wordLow, assignInt, compInt)
                                                                                                 #https://www.saltycrane.com/blog/2007/09/how-to-sort-python-dictionary-by-keys/ for help with sorting and printing
         #d_w_unsorted = sorted(d_w_unsorted)
         #print(sorted(d_w_unsorted))
