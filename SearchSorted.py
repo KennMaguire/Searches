@@ -25,7 +25,7 @@ The program does this through an unsorted searching method.
 import string
 import time
 import operator
-import header
+
 from itertools import islice
 import re
 #this function was found on stackoverflow for slicing a dictionary
@@ -63,52 +63,23 @@ class wordAndValue:
 #search and sort used for testing https://www.geeksforgeeks.org/binary-insertion-sort/
 
 
-def quickSort(unsortedList, _comp, _exch, p, r):
-    while p < r:
-        q = partition(unsortedList, _comp, _exch, p, r)
-                                             #was dealing with recursion depth issues and found help at https://www.geeksforgeeks.org/quicksort-tail-call-optimization-reducing-worst-case-space-log-n/
-        quickSort(unsortedList, _comp, _exch, p, q-1)          #originally used the tail recursive-quicksort from the textbook, but found that I still hit max recursion depth
-        #    p = q+1                                         #the if else method here works well because it only recursively calls whichever part (lower or higher) becomes smaller after partition
 
-        quickSort(unsortedList, _comp, _exch, q+1, r)
-        #    r = r-1
-
-        #print(unsortedList)
-
-
-    return unsortedList
-
-
-
-
-def partition(partList, _comp, _exch, p, r):
-    pivot = partList[r]
-#    print(pivot)
-    i = (p-1)
-    for j in range (p, r):
-        if header.comparisonAndCountQS(partList, j, pivot, _comp):
-            _exch.add(1)
-            partList[i], partList[j] = partList[j], partList[i]
-            i = i+1
-    _exch.add(1)
-    partList[i+1], partList[r] = partList[r], partList[i+1]
-    return i+1
 
 def sortedSearch(_sortedList, _searchKey, _assign, _comp):
 
     #_sortedList = quickSort(_sortedList, _comp, _assign, 0, (len(_sortedList)-1))
-    _sortedList.sort()
+
     wordV = wordAndValue(_searchKey, 1)
 
     end = (len(_sortedList)-1)          #end is the length of the list-1
     start = 0
-    for i in range(len(_sortedList)):
-        print(_sortedList[i].word, _sortedList[i].val)
-    print("\n\n")
+#    for i in range(len(_sortedList)):
+#        print(_sortedList[i].word, _sortedList[i].val)
+#    print("\n\n")
 
 
     while start <= end:
-        halfway = int((start + end)/2)      #each iteration, start is increased by 1,
+        halfway = int((start + end)/2)     #each iteration, start is increased by 1,
     #    print(halfway)
         if _searchKey > _sortedList[halfway].word:          #if key is at midpoint, add 1 to value
             #    print(3)
@@ -128,9 +99,15 @@ def sortedSearch(_sortedList, _searchKey, _assign, _comp):
                                   #if the key isn't greater or less than any value, add to list
     #print(4)
 #    print(_sortedList)
-    _sortedList = _sortedList[:halfway] + [wordV] + _sortedList[halfway:]                  #https://stackoverflow.com/questions/14895599/insert-an-element-at-specific-index-in-a-list-and-return-updated-list
-    _assign.add(1)
-    return _sortedList
+    if start >= end:
+        _sortedList = _sortedList[:start] + [wordV] + _sortedList[start:]                  #https://stackoverflow.com/questions/14895599/insert-an-element-at-specific-index-in-a-list-and-return-updated-list
+        _assign.add(1)
+        return _sortedList
+    else:
+        _sortedList = _sortedList[:halfway] + [wordV] + _sortedList[halfway:]                  #https://stackoverflow.com/questions/14895599/insert-an-element-at-specific-index-in-a-list-and-return-updated-list
+        _assign.add(1)
+        return _sortedList
+
 
 
     #print(2)
@@ -162,6 +139,7 @@ for line in f:
         #wordList.append(wordLow)
         #print(sortedList)
         if not sortedList:
+            print(1)
             firstWordV = wordAndValue(wordLow, 1)
         #    print(sortedList)
             sortedList.append(firstWordV)
