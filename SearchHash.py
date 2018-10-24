@@ -1,13 +1,12 @@
 """
 Kenneth Maguire
-Python 3 Program
+Python 3.7 Program
 
+Run with: python3 SearchHash.py
 
 SearchHash.py
 This program add the works of shakespeare to a hash table and determines how many of each word exists
 The program does this through an hash table searching method.
-
-
 
 
 """

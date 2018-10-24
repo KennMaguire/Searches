@@ -2,12 +2,11 @@
 Kenneth Maguire
 Python 3 Program
 
+Run with: python3 SearchSorted.py
 
 SearchSorted.py
 This program add the works of shakespeare to a list and determines how many of each word exists
 The program does this through an sorted searching method, specifically binary search.
-
-
 
 
 """
@@ -124,7 +123,7 @@ for line in f:
         #print(sortedList)
 
         if not sortedList:
-            print(1)
+            #print(1)
             firstWordV = wordAndValue(wordLow, 1)
         #    print(sortedList)
             sortedList.append(firstWordV)

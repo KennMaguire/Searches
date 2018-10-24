@@ -2,12 +2,11 @@
 Kenneth Maguire
 Python 3 Program
 
+Run with: python3 SearchUnsorted.py
 
 SearchUnsorted.py
 This program add the works of shakespeare to a dictionary and determines how many of each word exists
 The program does this through a unsorted searching method.
-
-
 
 
 """
